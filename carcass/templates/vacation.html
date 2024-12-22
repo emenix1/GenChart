@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    <title>Добавление отпуска</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Add or edit vacation</h1>
+        <br>
+        <form class="form-control-lg" method="post">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.name not in ['csrf_token', 'submit'] %}
+                {{ field.label() }}
+                {% if field.errors %}
+                    {{ field(class='invalid') }}
+                    <span class="alert-danger">
+                {% for e in field.errors %}
+                    {{ e }}
+                {% endfor %}
+            </span>
+                {% else %}
+                    {{ field }}
+                {% endif %}
+                <br><br>
+            {% endfor %}
+            <p>{{ form.submit(class='btn btn-outline-success') }}</p>
+        </form>
+    </div>
+    <br>
+    <br>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {% for emp in emp_data %}
+            {% for vac in vac_data  %}
+                {% if emp.id == vac.employee_id %}
+                    <div class="col">
+                      <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                          <h2 class="my-0 fw-normal">{{ emp.name }}</h2>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title pricing-card-title"> {{ vac.start }} ---> {{ vac.end }}</h5>
+                        </div>
+                      </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+       {% endfor %}
+    </div>
+{% endblock %}

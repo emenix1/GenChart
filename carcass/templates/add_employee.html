@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+<title>Добавление unita</title>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Добавление unita</h1>
+    <br>
+        <form class="form-control-lg"  method="post">
+       {{ form.hidden_tag() }}
+        {% for field in form if field.name not in ['csrf_token', 'submit'] %}
+            {{ field.label() }}
+            {% if field.errors %}
+                {{ field(class='invalid') }}
+            <span class="invalid">
+                {% for e in field.errors %}
+                    {{ e }}
+                {% endfor %}
+            </span>
+            {% else %}
+                {{ field }}
+            {% endif %}
+        <br><br>
+        {% endfor %}
+        <p >{{ form.submit(class='btn btn-outline-success') }}</p>
+        </form>
+</div>
+{% endblock %}

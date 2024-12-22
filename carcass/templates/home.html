@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    <title>KK GenChart</title>
+{% endblock %}
+
+{% block body %}
+        <div class="container fw-bold">
+            <table class="table">
+                <thead>
+                <tr class="table-dark">
+                    <td>Name</td>
+                    <td>AM</td>
+                    <td>break</td>
+                    <td>PM</td>
+                </tr>
+                <tbody>
+                {% for el in data %}
+                    <tr class="table-striped-columns.bg-dark.bg-gradient">
+                        <td>{{ el.name }}</td>
+                        <td>{{ el.am_duty }}</td>
+                        <td>{{ el.meal_break }}</td>
+                        <td>{{ el.pm_duty }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <br>
+    <div class="btn-group-lg text-center border-opacity-75">
+        <a class="btn btn-outline-warning lg" href="/genchart">Generate</a>
+        <a class="btn btn-outline-success" href="/save_data">Save</a>
+    </div><br><br>
+    <div class="container fw-bold">
+            <table class="table">
+                <thead>
+                <tr class="table-dark">
+                    <td>Who</td>
+                    <td>Whom</td>
+                    <td>Where</td>
+                </tr>
+                <tbody>
+                {% for el in subs %}
+                    <tr class="table-striped-columns">
+                        <td>{{ el[0] }}</td>
+                        <td>{{ el[1] }}</td>
+                        <td>{{ el[2] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+<title>KK GenChart</title>
+{% endblock %}
+{% block body%}
+    <div class="text-primary text-sm-center">
+    <h2> КК team</h2>
+    </div>
+    <br><br>
+    <div class="row row-cols-1 row-cols-md-4 mb-3">
+        {% for el in data %}
+        <div class="col">
+          <div class="card mb-4 rounded-1 shadow-sm">
+            <div class="card-header py-4">
+              <h2 class="my-0 fw-lighter text-lg-center">{{ el.name }}</h2>
+            </div>
+            <div class="card-body text-lg-center">
+              <h5 class="card-title pricing-card-title"> {{ el.status }}</h5>
+                <h5 class="card-title pricing-card-title"> {{ el.workdays[:3] }} --> {{ el.workdays[-3:] }}</h5>
+                <h5 class="card-title pricing-card-title"> {{ el.workshifts }}</h5>
+                <h5 class="card-title pricing-card-title"> {{ el.meal_break }}</h5>
+                <div class="card-footer">
+                    <div class="btn-group-lg">
+                        <a class="btn btn-outline-warning" href="/edit_empl/{{ el.id }}">Edit</a>
+
+
+                        <a class="btn btn-outline-danger" href="/confirm/{{ el.id }}">Delete</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
